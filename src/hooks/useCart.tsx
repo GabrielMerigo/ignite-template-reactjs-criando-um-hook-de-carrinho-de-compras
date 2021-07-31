@@ -34,9 +34,12 @@ export function CartProvider(props: CartProviderProps){
 
   const addProduct = async (productId: number) => {
     try {
-      // TODO
-    } catch {
-      // TODO
+      const { data } = await api.get(`products/${productId}`)
+      setCart([...cart, data])
+      const dadosTransformados = JSON.stringify(cart)
+      localStorage.setItem('@RocketShoes:cart', dadosTransformados)
+    } catch(err) {
+      console.log(err)
     }
   };
 
