@@ -21,14 +21,14 @@ interface CartContextData {
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
 
-export function CartProvider({ children }: CartProviderProps): JSX.Element {
+export function CartProvider(props: CartProviderProps){
   const [cart, setCart] = useState<Product[]>(() => {
-    // const storagedCart = Buscar dados do localStorage
+    const storagedCart = localStorage.getItem('@RocketShoes:cart');
 
-    // if (storagedCart) {
-    //   return JSON.parse(storagedCart);
-    // }
-
+    if (storagedCart) {
+      return JSON.parse(storagedCart);
+    }
+    
     return [];
   });
 
@@ -63,7 +63,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     <CartContext.Provider
       value={{ cart, addProduct, removeProduct, updateProductAmount }}
     >
-      {children}
+      {props.children}
     </CartContext.Provider>
   );
 }
