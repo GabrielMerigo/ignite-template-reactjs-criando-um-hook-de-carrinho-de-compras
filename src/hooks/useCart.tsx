@@ -78,8 +78,16 @@ export function CartProvider(props: CartProviderProps){
     amount
   }: UpdateProductAmount) => {
     try {
-      const { data } = await api.get(`products/${productId}`)
-      console.log(data)
+      const { data: product } = await api.get(`products/${productId}`);
+      const stock = await api.get(`stock/${productId}`);
+      const amount = product.amount
+      const currentAmount = amount + 1
+
+      console.log(currentAmount, stock.data.amount)
+      if(currentAmount > stock.data.amount){
+        toast.error('Quantidade solicitada fora de estoque')
+      }
+
     } catch {
       toast.error('Quantidade solicitada fora de estoque');
     }
