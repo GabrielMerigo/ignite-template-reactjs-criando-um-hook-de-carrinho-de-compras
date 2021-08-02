@@ -95,6 +95,7 @@ export function CartProvider(props: CartProviderProps){
       const updateCart = [...cart];
       const currentProduct = updateCart.find(product => product.id === productId);
 
+      
       if(currentProduct){
         currentProduct.amount = amount;
         setCart(updateCart);
