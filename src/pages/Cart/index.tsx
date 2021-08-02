@@ -6,6 +6,7 @@ import {
 } from 'react-icons/md';
 
 import { useCart } from '../../hooks/useCart';
+import { api } from '../../services/api';
 import { formatPrice } from '../../util/format';
 import { Container, ProductTable, Total } from './styles';
 
@@ -33,7 +34,7 @@ const Cart = (): JSX.Element => {
     )
 
   function handleProductIncrement(product: Product) {
-    // TODO
+    
   }
 
   function handleProductDecrement(product: Product) {
@@ -71,8 +72,8 @@ const Cart = (): JSX.Element => {
                   <button
                     type="button"
                     data-testid="decrement-product"
-                    // disabled={product.amount <= 1}
-                  // onClick={() => handleProductDecrement()}
+                    disabled={product.amount <= 1}
+                    // onClick={() => handleProductDecrement()}
                   >
                     <MdRemoveCircleOutline size={20} />
                   </button>
@@ -80,7 +81,7 @@ const Cart = (): JSX.Element => {
                     type="text"
                     data-testid="product-amount"
                     readOnly
-                    value={1}
+                    value={product.amount}
                   />
                   <button
                     type="button"

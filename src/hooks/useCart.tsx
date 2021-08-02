@@ -45,7 +45,7 @@ export function CartProvider(props: CartProviderProps){
         toast.error('Quantidade solicitada fora de estoque');
         return;
       }
-
+      console.log(amount, stockAmount)
       if(productsExists){
         productsExists.amount = amount;
       }else{
@@ -61,7 +61,7 @@ export function CartProvider(props: CartProviderProps){
       const dadosTransformados = JSON.stringify(updateCart)
       localStorage.setItem('@RocketShoes:cart', dadosTransformados)
     } catch(err) {
-      console.log(err)
+      toast.error('Deu ruim...')
     }
   };
 
@@ -73,11 +73,15 @@ export function CartProvider(props: CartProviderProps){
     }
   };
 
-  const updateProductAmount = async ({}: UpdateProductAmount) => {
+  const updateProductAmount = async ({
+    productId,
+    amount
+  }: UpdateProductAmount) => {
     try {
-      // TODO
+      const { data } = await api.get(`products/${productId}`)
+      console.log(data)
     } catch {
-      // TODO
+      toast.error('Quantidade solicitada fora de estoque');
     }
   };
 
