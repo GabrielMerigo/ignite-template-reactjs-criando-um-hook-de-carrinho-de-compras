@@ -36,7 +36,7 @@ const Home = (): JSX.Element => {
         const { data } = await api.get('products')
         setProducts(data)
       } catch (err) {
-        console.log(err)
+        console.log(err, '123')
       }
     }
 
@@ -70,7 +70,6 @@ const Home = (): JSX.Element => {
           </li>
         )
       })}
-
     </ProductList>
   );
 };
